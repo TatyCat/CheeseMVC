@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h2>MY CHEESES!!!</h2>
+
+<p><a asp-controller="Cheese" asp-action="Add">Add a Cheese</a></p>
+
+
+@if (ViewBag.CheesesListDict.Count == 0)
+{
+    <h3>No Cheeses yet, add some!</h3>
+
+}
+
+@if (ViewBag.CheesesListDict.Count != 0)
+{
+    <ul>
+        @foreach (Dictionary<string, string> cheesedict in ViewBag.CheesesListDict)
+        {
+
+            @foreach (KeyValuePair<string, string> cheesedesc in cheesedict)
+            {
+                <li>@cheesedesc.Key</li>
+                <li>@cheesedesc.Value</li>
+            }
+
+        }
+    </ul>
+
+}
+
+
