@@ -4,18 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CheeseMVC.Controllers
 {
     public class CheeseController : Controller
     {
-        static private List<Dictionary<string, string>> CheesesListDict = new List<Dictionary<string, string>>();
+        static private Dictionary<string, string> CheesesList = new Dictionary<string, string>();
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.CheesesListDict = CheesesListDict;
+            ViewBag.CheesesList = CheesesList;
             return View();
         }
         
@@ -28,12 +26,36 @@ namespace CheeseMVC.Controllers
         [Route("/Cheese/Add")]
         public IActionResult AddNewCheese(string cheesename, string cheesedescription)
         {
-            foreach(Dictionary<string, string> cheesedict in CheesesListDict)
+            CheesesList.Add(cheesename, cheesedescription);
+
+            return Redirect("/Cheese");
+        }
+        
+        public IActionResult Remove()
+        {
+            if(CheesesList.Count >0)
             {
-                cheesedict.Add(cheesename, cheesedescription);
+                ViewBag.CheesesList = CheesesList;
+                return View();
             }
 
-            ViewBag.CheesesListDict = CheesesListDict;
+            else
+            {
+                return Redirect("/Cheese");
+            }
+            
+        }
+
+        [HttpPost]
+        public IActionResult Remove(string name)
+        {
+            //i want to remove the user selected cheese from the cheeses string dictionary
+
+            //i dont need to check if it's contained bc the user is selecting from a list of cheeses already in the dict. 
+            //@cheese.Key is a string i'm passing in. 
+            //to theck if it works, i'll just redirect to the cheese page...maybe that's the problem. 
+            
+            CheesesList.Remove(name);
 
             return Redirect("/Cheese");
         }
