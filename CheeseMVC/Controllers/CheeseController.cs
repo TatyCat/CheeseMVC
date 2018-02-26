@@ -22,33 +22,37 @@ namespace CheeseMVC.Controllers
             return View();
         }
 
+// renamed route handler to Add so route naming is not needed
+        // [Route("/Cheese/Add")]
+        // public IActionResult AddNewCheese(string cheesename, string cheesedescription)
         [HttpPost]
-        [Route("/Cheese/Add")]
-        public IActionResult AddNewCheese(string cheesename, string cheesedescription)
+        public IActionResult Add(string cheesename, string cheesedescription)
         {
             CheesesList.Add(cheesename, cheesedescription);
 
             return Redirect("/Cheese");
         }
         
-        public IActionResult Remove()
-        {
-            if(CheesesList.Count >0)
-            {
-                ViewBag.CheesesList = CheesesList;
-                return View();
-            }
+// this view is not necessary. see code in the Cheese/index.cshtml file
+        // public IActionResult Remove()
+        // {
+        //     if(CheesesList.Count >0)
+        //     {
+        //         ViewBag.CheesesList = CheesesList;
+        //         return View();
+        //     }
 
-            else
-            {
-                return Redirect("/Cheese");
-            }
+        //     else
+        //     {
+        //         return Redirect("/Cheese");
+        //     }
             
-        }
+        // }
 
         [HttpPost]
         public IActionResult Remove(string name)
         {
+            
             //i want to remove the user selected cheese from the cheeses string dictionary
 
             //i dont need to check if it's contained bc the user is selecting from a list of cheeses already in the dict. 
