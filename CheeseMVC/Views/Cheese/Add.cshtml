@@ -1,10 +1,15 @@
-﻿<h1 style="color:#00e6e6;">Add a Cheese:</h1>
+﻿
+@{
+    ViewData["Title"] = "Add Cheese";
+}
+
+<h1 style="color:#00e6e6;">Add a Cheese:</h1>
 <hr>
 
 <form method="POST">
     Cheese Name: <input name="cheesename" type="text" />
     <br><br>
-    Cheese Descrition: <input name="cheesedescription" type="text" />
+    Cheese Description: <input name="cheesedescription" type="text" />
     <br><br>
     <input type="submit" value="Add Cheese" />
 </form>
