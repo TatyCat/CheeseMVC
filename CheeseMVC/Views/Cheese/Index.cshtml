@@ -1,6 +1,4 @@
 ﻿<h2 style="color:#00e6e6;">MY CHEESES!!!</h2>
-<hr />
-<p><a asp-controller="Cheese" asp-action="Add">Add a Cheese</a></p>
 
 
 @if (ViewBag.CheesesList.Count == 0)
@@ -8,30 +6,47 @@
     <h3>No Cheeses yet, add some!</h3>
 
 }
-
-@if (ViewBag.CheesesList.Count > 0)
+else
 {
-    <ul>
-        @foreach (KeyValuePair<string, string> cheesedesc in ViewBag.CheesesList)
-        {
-            <li>
-            <!--  
-                created a hidden input form with a X as a submit button
-                this form will make a POST request to the Remove route
-                uses the asp-* html helper tags (self descriptive names)
-                the hidden input element type is used to store the value as the Key of the dictionary
-                without showing it to the user. only the X of the submit input element is displayed
+    <table class="table ">
+        <th> </th>
+        <th style="">Cheese:</th>
+        <th style="">Description:</th>
 
-                the code is all put within the form to keep it in-line (this could also be done with CSS)
-             -->
-                <form asp-action="Remove" asp-controller="Cheese" method="POST">
-                    <input type="hidden" value="@(cheesedesc.Key)" name="name">
-                    <input type="submit" value="X">
-                    @cheesedesc.Key: @cheesedesc.Value
+
+        @foreach (KeyValuePair<string, string> cheese in ViewBag.CheesesList)
+    {
+        <!--
+       created a hidden input form with a X as a submit button
+       this form will make a POST request to the Remove route
+       uses the asp-* html helper tags (self descriptive names)
+       the hidden input element type is used to store the value as the Key of the dictionary
+       without showing it to the user. only the X of the submit input element is displayed
+
+       the code is all put within the form to keep it in-line (this could also be done with CSS)
+    -->
+
+        <col width="80">
+
+        <tr>
+            <td>
+                <form asp-controller="Cheese" asp-action="Remove" method="POST">
+                    <input type="hidden" value="@cheese.Key" name="name">
+                    <input type="submit" value="Remove Cheese">
                 </form>
-            </li>
-        }
-    </ul>
+            </td>
+
+            <td>
+                @cheese.Key
+            </td>
+            <td>
+                @cheese.Value
+            </td>
+        </tr>
+}
+    </table>
 }
 
-
+    <form>  
+        <button asp-controller="Cheese" asp-action="Add" class="btn btn-default">Add Cheese</button>
+    </form>

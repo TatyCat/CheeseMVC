@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Remove Cheese";
+}
+
+<h1 style="color:#00e6e6;">Remove Cheese</h1>
+<hr>
+
+    <form method="POST" style="padding-left:.5em;">
+            @foreach (KeyValuePair<string, string> cheese in ViewBag.CheesesList)
+            {
+                <input type="checkbox" name="@cheese.Key" value="@cheese.Key"/> @cheese.Key <br />
+            }
+            <br />
+            <input type="submit" value="Delete Cheese" class="btn btn-default" />
+    </form>
